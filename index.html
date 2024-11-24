@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharklife RP - Team Bewerbung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #e3f2fd; /* Blaulicht-Hintergrund */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1e88e5; /* Dunkles Blau */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(30, 136, 229, 0.5);
+        }
+        h1, h2 {
+            color: #1e88e5;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #1e88e5;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #1565c0;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #1e88e5;
+            color: #fff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sharklife RP - Team Bewerbung</h1>
+
+        <img src="img/sharklife..png"
+        
+    </header>
+    
+        
+    </header>
+    
+        <main>
+
+        
+            <p><strong>Fülle das Formular aus, um dich für das Sharklife-Team zu bewerben!</strong></p>
+        <form id="bewerbungForm">
+            <label for="alter">Alter:</label>
+            <input type="number" id="alter" name="alter" min="10" max="99" required>
+
+            <label for="wieso_du">Warum du:</label>
+            <textarea id="wieso_du" name="wieso_du" rows="5" placeholder="Erzähle uns von deinen Erfahrungen, Stärken und deiner Motivation." required></textarea>
+
+            <label for="wieso_server">Warum unser Server:</label>
+            <textarea id="wieso_server" name="wieso_server" rows="5" placeholder="Was gefällt dir an Sharklife? Warum möchtest du ins Team?" required></textarea>
+
+            <label for="verfuegbarkeit">Deine Verfügbarkeit:</label>
+            <textarea id="verfuegbarkeit" name="verfuegbarkeit" rows="3" placeholder="Wie oft bist du online? Zu welchen Zeiten?" required></textarea>
+
+            <label for="ziel">Dein Ziel:</label>
+            <textarea id="ziel" name="ziel" rows="3" placeholder="Was möchtest du im Team erreichen?" required></textarea>
+
+            <label for="kontakt">Discord-Name (mit Tag, z. B. Name#1234):</label>
+            <input type="text" id="kontakt" name="kontakt" required>
+
+            <button type="submit">Bewerbung abschicken</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Sharklife RP</p>
+    </footer>
+
+    <script>
+        // Webhook URL für Discord
+        const webhookURL = 'https://discord.com/api/webhooks/1310250569847410708/zNVA-lBSkUCZmJVfwECU8Coy_8N2tYRT35n4xN_ywI78pj24wRB3wcu4RO8TYPQ4T1p_'; // Ersetze durch deinen Webhook-Link
+
+        // Formular-Submit
+        document.getElementById("bewerbungForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Verhindert das standardmäßige Absenden des Formulars
+
+            // Formulardaten sammeln
+            const formData = new FormData(event.target);
+            const data = {
+                content: "Neue Bewerbung für das Sharklife RP-Team:\n\n"
+            };
+
+            formData.forEach((value, key) => {
+                data.content += `${key}: ${value}\n`;
+            });
+
+            // Anfrage an Discord Webhook senden
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Deine Bewerbung wurde erfolgreich gesendet!");
+                    event.target.reset(); // Formular zurücksetzen
+                } else {
+                    alert("Etwas ist schief gelaufen. Bitte versuche es später erneut.");
+                }
+            })
+            .catch(error => {
+                console.error('Fehler beim Senden der Bewerbung:', error);
+                alert("Fehler beim Senden der Bewerbung.");
+            });
+        });
+    </script>
+</body>
+</html>
+
